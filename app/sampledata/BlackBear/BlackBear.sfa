@@ -1,0 +1,49 @@
+{
+  materials: [
+    {
+      name: 'BlackBear_mat',
+      parameters: [
+        {
+          baseColor: 'BlackBear_BaseColor',
+        },
+        {
+          baseColorTint: [
+            0.5,
+            0.5,
+            0.5,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/BlackBear/BlackBear.obj',
+    name: 'BlackBear',
+    recenter: 'root',
+  },
+  samplers: [
+    {
+      file: 'sampledata/BlackBear\\BlackBear_BaseColor.png',
+      name: 'BlackBear_BaseColor',
+      pipeline_name: 'BlackBear_BaseColor.png',
+    },
+  ],
+  version: '0.52:1',
+}

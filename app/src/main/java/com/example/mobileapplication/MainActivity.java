@@ -38,15 +38,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-
-
     TextView dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf, baer, alpaca;
 
     View arrayView[];
-
-
     int selected = 1;
-
 
 
 // Information welches Tier in der Array List ausgewählt wurde, als auch die gewählte Position werden gespeichert
@@ -94,14 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     createModel(anchorNode,selected);
             }
-        }); 
-
+        });
 
         setupModel();
-
-
-
-
     }
 
 
@@ -216,8 +206,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             return null;
                         }
                 );
-
-
     }
 
 
@@ -323,9 +311,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alpaca.select();
 
         }
-
-
-
     }
 
     //Schnittstellendefinition für einen Callback, wenn auf eine Ansicht geklickt wird
@@ -333,8 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         for (int i=0; i<arrayView.length;i++)
             arrayView[i].setOnClickListener(this);
-
-
     }
 
     //Anlegen der Array List mit den einzelnen 3D Objecten
@@ -344,9 +327,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf, baer, alpaca
         };
-
-
-
     }
 
     //Hierachie für die Positierung in der Szene erstellen
@@ -421,11 +401,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             selected = 11;
             setBackground (view.getId());
         }
-
-
-
-
-
     }
 
 
@@ -441,6 +416,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
 }
 
