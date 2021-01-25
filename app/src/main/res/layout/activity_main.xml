@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<!-- Verwendung eines FrameLayouts um untergeordnete Ansichten übereinander zu stapeln -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
+    <!-- Das Fragment definiert und verwaltet sein eigenes moudulares Layout und macht es Wiederverwendbar-->
+
+
+    <!--Horizontale Scrollbar welche die clickbaren Tiernamen beinhalten -->
 
     <fragment
         android:id="@+id/sceneform_ux_fragment"
@@ -16,7 +22,6 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:scrollbarSize="6dp">
 
         <LinearLayout
@@ -28,7 +33,7 @@
 
             <TextView
                 android:id="@+id/hase"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Hase"
@@ -38,7 +43,7 @@
 
             <TextView
                 android:id="@+id/dachs"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Dachs"
@@ -48,7 +53,7 @@
 
             <TextView
                 android:id="@+id/otter"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Otter"
@@ -58,7 +63,7 @@
 
             <TextView
                 android:id="@+id/luchs"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Luchs"
@@ -68,7 +73,7 @@
 
             <TextView
                 android:id="@+id/fuchs"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Fuchs"
@@ -78,7 +83,7 @@
 
             <TextView
                 android:id="@+id/wolf"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Wolf"
@@ -88,7 +93,7 @@
 
             <TextView
                 android:id="@+id/hirsch"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Hirsch"
@@ -97,8 +102,18 @@
                 android:textSize="28sp" />
 
             <TextView
+                android:id="@+id/baer"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Bär"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="28sp" />
+
+            <TextView
                 android:id="@+id/eule"
-                android:layout_width="84dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:text="Eule"
@@ -116,8 +131,19 @@
                 android:textColor="@android:color/black"
                 android:textSize="28sp" />
 
+            <TextView
+                android:id="@+id/alpaca"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Easter Egg"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="28sp" />
+
         </LinearLayout>
 
     </HorizontalScrollView>
 
-</RelativeLayout>
+</FrameLayout>
+

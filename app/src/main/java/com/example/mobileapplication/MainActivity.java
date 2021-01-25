@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,15 +14,16 @@ import com.google.ar.core.HitResult;
 import com.google.ar.core.Plane;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.rendering.ModelRenderable;
-import com.google.ar.sceneform.rendering.Renderable;
-import com.google.ar.sceneform.rendering.ViewRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.BaseArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     ArFragment arFragment;
+
+    //Renderable - Bezeichnet ein 3D-Modell und besteht aus Eckpunkten, Materialien, Texturen
     private ModelRenderable dachsRenderable,
                             euleRenderable,
                             fuchsRenderable,
@@ -32,45 +32,62 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             hirschRenderable,
                             luchsRenderable,
                             otterRenderable,
-                            wolfRenderable;
+                            wolfRenderable,
+                            baerRenderable,
+                            alpacaRenderable;
 
 
 
-    TextView dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf;
+
+
+    TextView dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf, baer, alpaca;
 
     View arrayView[];
-    ViewRenderable name_tier;
+
 
     int selected = 1;
 
 
+
+// Information welches Tier in der Array List ausgewählt wurde, als auch die gewählte Position werden gespeichert
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // Verknüpfen der 3D Modelle mit deren jewiligen id's aus der xml Datei
         arFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.sceneform_ux_fragment);
 
-        dachs = (TextView) findViewById(R.id.dachs);
-        eule = (TextView) findViewById(R.id.eule);
-        fuchs = (TextView) findViewById(R.id.fuchs);
-        habicht = (TextView) findViewById(R.id.habicht);
-        hase = (TextView) findViewById(R.id.hase);
-        hirsch = (TextView) findViewById(R.id.hirsch);
-        luchs = (TextView) findViewById(R.id.luchs);
-        otter = (TextView) findViewById(R.id.otter);
-        wolf = (TextView) findViewById(R.id.wolf);
+        dachs =  findViewById(R.id.dachs);
+        eule =  findViewById(R.id.eule);
+        fuchs =  findViewById(R.id.fuchs);
+        habicht =  findViewById(R.id.habicht);
+        hase =  findViewById(R.id.hase);
+        hirsch =  findViewById(R.id.hirsch);
+        luchs = findViewById(R.id.luchs);
+        otter =  findViewById(R.id.otter);
+        wolf =  findViewById(R.id.wolf);
+        baer =  findViewById(R.id.baer);
+        alpaca =  findViewById(R.id.alpaca);
 
-        
+
+
+
         setArrayView();
         setClickListener();
 
+        //Wird aufgerufen, wenn auf ARCore Ebene getippt wird
+        //hitResult - Das ARCore-Trefferergebnis, das beim Tippen auf die Ebene aufgetreten ist
+        //Plane	- Die ARCore Ebene, die getippt wurde
+        //motionEvent - das Bewegungsereignis, das das Tippen ausgelöst hat
 
         arFragment.setOnTapArPlaneListener(new BaseArFragment.OnTapArPlaneListener() {
 
             @Override
             public void onTapPlane(HitResult hitResult, Plane plane, MotionEvent motionEvent) {
 
+                //Setzten des Positionspunkts
                     Anchor anchor = hitResult.createAnchor();
                     AnchorNode anchorNode = new AnchorNode(anchor);
                     anchorNode.setParent(arFragment.getArSceneView().getScene());
@@ -87,7 +104,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+    //ModelRenderable.builder konstruiert ein Renderable 3D Objekt mit den Parametern des Builders
+    //Fehlermeldung wenn 3D Objekt nicht geladen werden kann
     private void setupModel() {
+
 
         ModelRenderable.builder()
                 .setSource(this,R.raw.dachs)
@@ -178,9 +199,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                 );
 
+        ModelRenderable.builder()
+                .setSource(this,R.raw.baer)
+                .build().thenAccept(renderable -> baerRenderable = renderable)
+                .exceptionally(throwable -> {
+                            Toast.makeText(this, "Nicht möglich Wolf Model zu laden", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
+        ModelRenderable.builder()
+                .setSource(this,R.raw.alpaca)
+                .build().thenAccept(renderable -> alpacaRenderable = renderable)
+                .exceptionally(throwable -> {
+                            Toast.makeText(this, "Nicht möglich Wolf Model zu laden", Toast.LENGTH_SHORT).show();
+                            return null;
+                        }
+                );
+
 
     }
 
+
+    //Gerendertes 3D Objekt kann mithilfe des TransformationSystem, umsetzen, skalieren und rotieren
     private void createModel(AnchorNode anchorNode, int selected) {
 
         if(selected == 1)
@@ -265,9 +306,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+        else if (selected == 10){
+
+            TransformableNode baer = new TransformableNode(arFragment.getTransformationSystem());
+            baer.setParent(anchorNode);
+            baer.setRenderable(baerRenderable);
+            baer.select();
+
+        }
+
+        else if (selected == 11){
+
+            TransformableNode alpaca = new TransformableNode(arFragment.getTransformationSystem());
+            alpaca.setParent(anchorNode);
+            alpaca.setRenderable(alpacaRenderable);
+            alpaca.select();
+
+        }
+
+
 
     }
 
+    //Schnittstellendefinition für einen Callback, wenn auf eine Ansicht geklickt wird
     private void setClickListener() {
 
         for (int i=0; i<arrayView.length;i++)
@@ -276,17 +337,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    //Anlegen der Array List mit den einzelnen 3D Objecten
     private void setArrayView() {
 
         arrayView = new View[]{
 
-                dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf,
+                dachs, eule, fuchs, habicht, hase, hirsch, luchs, otter, wolf, baer, alpaca
         };
 
 
 
     }
 
+    //Hierachie für die Positierung in der Szene erstellen
     @Override
     public void onClick(View view) {
 
@@ -346,8 +409,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setBackground (view.getId());
         }
 
+        else if(view.getId() == R.id.baer)
+        {
+            selected = 10;
+            setBackground (view.getId());
+        }
+
+
+        else if(view.getId() == R.id.alpaca)
+        {
+            selected = 11;
+            setBackground (view.getId());
+        }
+
+
+
+
+
     }
 
+
+    //Graue Hintergrundfarbe für die Schaltfläche des aktiven Tieres setzen
     private void setBackground(int id) {
         for(int i=0;i<arrayView.length;i++)
         {
@@ -359,7 +441,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
 
 }
 

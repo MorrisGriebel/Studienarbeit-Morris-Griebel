@@ -1,5 +1,7 @@
+//Anwenden des Plugins
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.ar.sceneform.plugin'
+
 
 android {
     compileSdkVersion 28
@@ -8,7 +10,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
+    //SdkVersion 28, umfangreichste Unterstützung des Google Sceneform Plugins
     defaultConfig {
         applicationId "com.example.mobileapplication"
         minSdkVersion 26
@@ -35,9 +37,11 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.5.0'
+    //Implementation des Google Sceneform Plugins mit den entsprechenden Version
 }
 
 
+//Dateipfade der 3D Objekte und deren Texturen
 
 sceneform.asset('sampledata/BobCat/Bobcat.obj',
         'default',
@@ -83,3 +87,13 @@ sceneform.asset('sampledata/Fox/Fox.obj',
         'default',
         'sampledata/Fox/Fox.sfa',
         'src/main/assets/Fox')
+
+sceneform.asset('sampledata/Llama/Llama.obj',
+        'default',
+        'sampledata/Llama/Llama.sfa',
+        'src/main/assets/Llama')
+
+sceneform.asset('sampledata/BlackBear/BlackBear.obj',
+        'default',
+        'sampledata/BlackBear/BlackBear.sfa',
+        'src/main/assets/BlackBear')
